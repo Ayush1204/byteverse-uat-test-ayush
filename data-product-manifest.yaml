@@ -1,0 +1,262 @@
+version: 0.0.2
+jobId: "777"
+jobName: newsadp_uat_SpecialChar
+jobType: Source Aligned Data Product
+developerId: aaf6a67f-7b8b-4d1d-981d-5a26b24475dc
+domain: domain1
+alias: newsadpuat11**
+discoveryPort:
+  name: newsadp_uat_SpecialChar
+inputPorts:
+  - alias: Test_Data_Set_1
+    isDynamic: true
+    connection: Test Connection 1
+    tableName/query: table_1
+    optional:
+      persistDataFrame: false
+      enableDataReconciliation: false
+      enforceSchema: false
+      dataSetUrn: urn:dv:dataset:4b0d4f89-f50a-4d06-bcac-18fa95d9041e
+    type: readMySqlDbUsingJdbc
+productState:
+  isDynamic: true
+  alias: newsadpuat11**
+  retentionVersions: ""
+  logicalSchema:
+    properties:
+      INV_DATE:
+        type: STRING
+        description: Invoice Date's it's a nice weather for my city's
+      CANCEL_DATE:
+        type: STRING
+        description: Cancel Date
+      Invoice_Cancellation_Date:
+        type: STRING
+        description: Invoice_Cancellation_Date
+      ORDER_DATE:
+        type: STRING
+        description: ORDER_DATE
+      ORDER_NUM:
+        type: STRING
+        description: Order No for the item
+      VIN:
+        type: STRING
+        description: Vehicle Identification Number%
+      DEALER_MAP_CD:
+        type: STRING
+        description: Dealer Mapping Code
+      Company_FA:
+        type: STRING
+        description: Dealer Mapping Code
+      Location_code:
+        type: STRING
+        description: Location Code
+      PARENT_GROUP:
+        type: STRING
+        description: Parent Group
+      Invoice_type:
+        type: STRING
+        description: type of Invoice
+      Invoice_Number:
+        type: STRING
+        description: Invoice Number
+      TEHSIL_CODE:
+        type: STRING
+        description: Code Of Tehsil
+      VILLAGE_CODE:
+        type: STRING
+        description: Code Of Village
+      STATE_CODE:
+        type: STRING
+        description: Code Of State
+      CS_MGA_Sold_Amount:
+        type: STRING
+        description: MGA Sold Amount
+      TDS_Amount_OrdBook:
+        type: STRING
+        description: TDS Amount
+      Interest_Amount:
+        type: STRING
+        description: Interest Amount
+      Final_Amount:
+        type: STRING
+        description: Final Amount
+      EMI_Amount:
+        type: STRING
+        description: EMI Amount
+      Insurance_Amount:
+        type: STRING
+        description: Insurance Amount
+      Net_Premium_Amount:
+        type: STRING
+        description: Net_Premium_Amount
+      Autocard_Booked_Amount:
+        type: STRING
+        description: Autocard_Booked_Amount
+      Extended_Warranty_Booked_Amount:
+        type: STRING
+        description: Extended_Warranty_Booked_Amount
+      MI_Booked_Amount:
+        type: STRING
+        description: MI_Booked_Amount
+      Financed_Amount:
+        type: STRING
+        description: Financed_Amount
+      Write_Off_Amount_OrdBook:
+        type: STRING
+        description: Write_Off_Amount_OrdBook
+      Booking_Amount:
+        type: STRING
+        description: Booking_Amount
+      Received_Amount_orbook:
+        type: STRING
+        description: Received_Amount_orbook
+      Charge_Amount_ordbook:
+        type: STRING
+        description: Charge_Amount_ordbook
+      MGA_Final_Amount:
+        type: STRING
+        description: MGA_Final_Amount
+      Variant_Code:
+        type: STRING
+        description: VARIANT_Code
+      Ecolor_Code:
+        type: STRING
+        description: Ecolor_Code
+      Booking_Amount_Invoice:
+        type: STRING
+        description: Booking_Amount_Invoice
+      Loyalty_Redeem_Amount:
+        type: STRING
+        description: Loyalty_Redeem_Amount
+      Charge_Amount:
+        type: STRING
+        description: Charge_Amount
+      FCB_Amount:
+        type: STRING
+        description: FCB_Amount
+      Financed_Amount_invoice:
+        type: STRING
+        description: Financed_Amount_invoice
+      Invoice_Amount:
+        type: STRING
+        description: Invoice_Amount
+      Interest_Amount_invoice:
+        type: STRING
+        description: Interest_Amount_invoice
+      Cancel_Charge_Amount:
+        type: STRING
+        description: Cancel_Charge_Amount
+      Received_Amount:
+        type: STRING
+        description: Received_Amount
+      Oct_Amount:
+        type: STRING
+        description: Oct_Amount
+      Write_Off_Amount_Invoice:
+        type: STRING
+        description: Write_Off_Amount_Invoice
+      Cancel_Invoice_Amount:
+        type: STRING
+        description: Cancel_Invoice_Amount
+      Hypo_Amount:
+        type: STRING
+        description: Hypo_Amount
+      TDS_Amount_Invoice:
+        type: STRING
+        description: TDS_Amount_Invoice
+      Region_Code:
+        type: STRING
+        description: Region_Code
+      BILL_PIN:
+        type: STRING
+        description: BILL_PIN
+      BILL_ADDRESS1:
+        type: STRING
+        description: BILL_ADDRESS1
+      BILL_ADDRESS2:
+        type: STRING
+        description: BILL_ADDRESS2
+      BILL_ADDRESS3:
+        type: STRING
+        description: BILL_ADDRESS3
+      CUSTOMER_CODE:
+        type: STRING
+        description: CUSTOMER_CODE
+      EXCHANGE_FLAG:
+        type: STRING
+        description: EXCHANGE_FLAG
+  stateStoreType: loadDataIceberg
+  isProfilingEnabled: false
+  updateStrategy: Overwrite
+  tableName: s3Source.newsadpuat
+  warehousePath: s3://bp-spark-sql-library-test-acc/
+  catalogName: glue
+  optional:
+    persistDataFrame: false
+    enableDataReconciliation: false
+    enforceSchema: false
+    enforceSchemaMethod: Warning
+    catalogType: glue
+  refreshInterval: None
+transformation:
+  - isDynamic: true
+    alias: Spark_SQL_1
+    description: UATstep1#@
+    sequence: 2
+    inputDataFrameList:
+      - inputDataFrame: Test_Data_Set_1
+        tempViewName: newsadpuat%
+    query: SELECT       DISTINCT     SI.INV_DATE,     SI.CANCEL_DATE,     CASE         WHEN       SI.CANCEL_DATE
+      IS NULL THEN SI.INV_DATE         ELSE       SI.CANCEL_DATE     END
+      AS       Invoice_Cancellation_Date,     SO.ORDER_DATE,     SO.ORDER_NUM,     SI.VIN,     SI.DEALER_MAP_CD       AS
+      Dealer_map_code,     SI.COMP_FA AS Company_FA,     SI.LOC_CD
+      AS       Location_code,     SI.PARENT_GROUP,     SI.inv_type
+      AS       invoice_type,     SI.inv_num AS invoice_number,     SO.TEHSIL_CD
+      AS       TEHSIL_CODE,     SO.VILLAGE_CD AS VILLAGE_CODE,     SO.STATE_CD
+      AS       STATE_CODE,     SO.CS_MGA_SOLD_AMT AS
+      CS_MGA_Sold_Amount,     SO.TDS_AMT       AS
+      TDS_Amount_OrdBook,     SO.INTEREST_AMT
+      AS       Interest_Amount,     SO.FIN_AMT AS Final_Amount,     SO.EMI_AMT
+      AS       EMI_Amount,     SO.INSURANCE_AMT AS
+      Insurance_Amount,     SO.NET_PREM_AMT       AS
+      Net_Premium_Amount,     SO.AUTOCARD_BOOKED_AMT
+      AS       Autocard_Booked_Amount,     SO.EW_BOOKED_AMT
+      AS       Extended_Warranty_Booked_Amount,     SO.MI_BOOKED_AMT
+      AS       MI_Booked_Amount,     SO.FINANCED_AMT
+      AS       Financed_Amount,     SO.WRITEOFF_AMT
+      AS       Write_Off_Amount_OrdBook,     SO.BOOKING_AMT
+      AS       Booking_Amount,     SO.RECD_AMT
+      AS       Received_Amount_orbook,     SO.CHARGE_AMT
+      AS       Charge_Amount_ordbook,     SO.MGA_FIN_AMT
+      AS       MGA_Final_Amount,     SI.VARIANT_CD AS
+      VARIANT_CD,     SI.ECOLOR_CD AS       ECOLOR_CD,     SI.BOOKING_AMT
+      AS       Booking_Amount_Invoice,     SI.LOYL_REDEEM_AMT
+      AS       Loyalty_Redeem_Amount,     SI.CHARGE_AMT AS
+      Charge_Amount,     SI.FCB_AMT       AS FCB_Amount,     SI.FINANCED_AMT
+      AS       Financed_Amount_invoice,     SI.INV_AMT
+      AS       Invoice_Amount,     SI.INTEREST_AMT
+      AS       Interest_Amount_invoice,     SI.CANCEL_CHARGE_AMT
+      AS       Cancel_Charge_Amount,     SI.RECD_AMT AS
+      Received_Amount,     SI.OCT_AMT       AS Oct_Amount,     SI.WRITEOFF_AMT
+      AS       Write_Off_Amount_Invoice,     SI.CANCEL_INV_AMT
+      AS       Cancel_Invoice_Amount,     SI.HYPO_AMT AS
+      Hypo_Amount,     SI.TDS_AMT AS       TDS_Amount_Invoice,     SO.REGION_CD
+      AS REGION_CD,     SO.BILL_PIN AS       BILL_PIN,     SO.BILL_ADDRESS1 AS
+      BILL_ADDRESS1,     SO.BILL_ADDRESS2
+      AS       BILL_ADDRESS2,     SO.BILL_ADDRESS3 AS
+      BILL_ADDRESS3,     SI.EXCHANGE_FLAG       AS EXCHANGE_FLAG,
+        SO.CUSTOMER_CODE AS CUSTOMER_CODE,     CURRENT_DATE
+      AS       ETL_Inserted_Date,     CURRENT_DATE
+      AS       ETL_Modified_Date,     'Platform_admin'
+      AS       ETL_Created_By,     'Platform_admin' AS ETL_Updated_By
+      FROM     SH_INVOICE       SI JOIN     SH_ORDBOOK SO ON SI.ORDER_NUM
+      =       SO.ORDER_NUM                   AND SI.PARENT_GROUP
+      =       SO.PARENT_GROUP                   AND SI.DEALER_MAP_CD
+      =       SO.DEALER_MAP_CD                   AND SI.COMP_FA
+      =       SO.COMP_FA                   AND SI.LOC_CD = SO.LOC_CD
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
+controlPort:
+  dataQualityRules: {}
