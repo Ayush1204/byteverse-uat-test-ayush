@@ -1,10 +1,10 @@
-version: 0.0.2
+version: 0.0.3
 jobId: "777"
 jobName: newsadp_uat_SpecialChar
 jobType: Source Aligned Data Product
 developerId: aaf6a67f-7b8b-4d1d-981d-5a26b24475dc
 domain: domain1
-alias: newsadpuat11**
+alias: newsadpuat11_
 discoveryPort:
   name: newsadp_uat_SpecialChar
 inputPorts:
@@ -20,7 +20,7 @@ inputPorts:
     type: readMySqlDbUsingJdbc
 productState:
   isDynamic: true
-  alias: newsadpuat11**
+  alias: newsadpuat11_
   retentionVersions: ""
   logicalSchema:
     properties:
@@ -202,59 +202,43 @@ productState:
 transformation:
   - isDynamic: true
     alias: Spark_SQL_1
-    description: UATstep1#@
+    description: "UATstepchar "
     sequence: 2
     inputDataFrameList:
       - inputDataFrame: Test_Data_Set_1
         tempViewName: newsadpuat%
-    query: SELECT       DISTINCT     SI.INV_DATE,     SI.CANCEL_DATE,     CASE         WHEN       SI.CANCEL_DATE
-      IS NULL THEN SI.INV_DATE         ELSE       SI.CANCEL_DATE     END
-      AS       Invoice_Cancellation_Date,     SO.ORDER_DATE,     SO.ORDER_NUM,     SI.VIN,     SI.DEALER_MAP_CD       AS
-      Dealer_map_code,     SI.COMP_FA AS Company_FA,     SI.LOC_CD
-      AS       Location_code,     SI.PARENT_GROUP,     SI.inv_type
-      AS       invoice_type,     SI.inv_num AS invoice_number,     SO.TEHSIL_CD
-      AS       TEHSIL_CODE,     SO.VILLAGE_CD AS VILLAGE_CODE,     SO.STATE_CD
-      AS       STATE_CODE,     SO.CS_MGA_SOLD_AMT AS
-      CS_MGA_Sold_Amount,     SO.TDS_AMT       AS
-      TDS_Amount_OrdBook,     SO.INTEREST_AMT
-      AS       Interest_Amount,     SO.FIN_AMT AS Final_Amount,     SO.EMI_AMT
-      AS       EMI_Amount,     SO.INSURANCE_AMT AS
-      Insurance_Amount,     SO.NET_PREM_AMT       AS
-      Net_Premium_Amount,     SO.AUTOCARD_BOOKED_AMT
-      AS       Autocard_Booked_Amount,     SO.EW_BOOKED_AMT
-      AS       Extended_Warranty_Booked_Amount,     SO.MI_BOOKED_AMT
-      AS       MI_Booked_Amount,     SO.FINANCED_AMT
-      AS       Financed_Amount,     SO.WRITEOFF_AMT
-      AS       Write_Off_Amount_OrdBook,     SO.BOOKING_AMT
-      AS       Booking_Amount,     SO.RECD_AMT
-      AS       Received_Amount_orbook,     SO.CHARGE_AMT
-      AS       Charge_Amount_ordbook,     SO.MGA_FIN_AMT
-      AS       MGA_Final_Amount,     SI.VARIANT_CD AS
-      VARIANT_CD,     SI.ECOLOR_CD AS       ECOLOR_CD,     SI.BOOKING_AMT
-      AS       Booking_Amount_Invoice,     SI.LOYL_REDEEM_AMT
-      AS       Loyalty_Redeem_Amount,     SI.CHARGE_AMT AS
-      Charge_Amount,     SI.FCB_AMT       AS FCB_Amount,     SI.FINANCED_AMT
-      AS       Financed_Amount_invoice,     SI.INV_AMT
-      AS       Invoice_Amount,     SI.INTEREST_AMT
-      AS       Interest_Amount_invoice,     SI.CANCEL_CHARGE_AMT
-      AS       Cancel_Charge_Amount,     SI.RECD_AMT AS
-      Received_Amount,     SI.OCT_AMT       AS Oct_Amount,     SI.WRITEOFF_AMT
-      AS       Write_Off_Amount_Invoice,     SI.CANCEL_INV_AMT
-      AS       Cancel_Invoice_Amount,     SI.HYPO_AMT AS
-      Hypo_Amount,     SI.TDS_AMT AS       TDS_Amount_Invoice,     SO.REGION_CD
-      AS REGION_CD,     SO.BILL_PIN AS       BILL_PIN,     SO.BILL_ADDRESS1 AS
-      BILL_ADDRESS1,     SO.BILL_ADDRESS2
-      AS       BILL_ADDRESS2,     SO.BILL_ADDRESS3 AS
-      BILL_ADDRESS3,     SI.EXCHANGE_FLAG       AS EXCHANGE_FLAG,
-        SO.CUSTOMER_CODE AS CUSTOMER_CODE,     CURRENT_DATE
-      AS       ETL_Inserted_Date,     CURRENT_DATE
-      AS       ETL_Modified_Date,     'Platform_admin'
-      AS       ETL_Created_By,     'Platform_admin' AS ETL_Updated_By
-      FROM     SH_INVOICE       SI JOIN     SH_ORDBOOK SO ON SI.ORDER_NUM
-      =       SO.ORDER_NUM                   AND SI.PARENT_GROUP
-      =       SO.PARENT_GROUP                   AND SI.DEALER_MAP_CD
-      =       SO.DEALER_MAP_CD                   AND SI.COMP_FA
-      =       SO.COMP_FA                   AND SI.LOC_CD = SO.LOC_CD
+    query: SELECT DISTINCT SI.INV_DATE, SI.CANCEL_DATE, CASE WHEN SI.CANCEL_DATE IS
+      NULL THEN SI.INV_DATE ELSE SI.CANCEL_DATE END AS
+      Invoice_Cancellation_Date, SO.ORDER_DATE, SO.ORDER_NUM, SI.VIN,
+      SI.DEALER_MAP_CD AS Dealer_map_code, SI.COMP_FA AS Company_FA, SI.LOC_CD
+      AS Location_code, SI.PARENT_GROUP, SI.inv_type AS invoice_type, SI.inv_num
+      AS invoice_number, SO.TEHSIL_CD AS TEHSIL_CODE, SO.VILLAGE_CD AS
+      VILLAGE_CODE, SO.STATE_CD AS STATE_CODE, SO.CS_MGA_SOLD_AMT AS
+      CS_MGA_Sold_Amount, SO.TDS_AMT AS TDS_Amount_OrdBook, SO.INTEREST_AMT AS
+      Interest_Amount, SO.FIN_AMT AS Final_Amount, SO.EMI_AMT AS EMI_Amount,
+      SO.INSURANCE_AMT AS Insurance_Amount, SO.NET_PREM_AMT AS
+      Net_Premium_Amount, SO.AUTOCARD_BOOKED_AMT AS Autocard_Booked_Amount,
+      SO.EW_BOOKED_AMT AS Extended_Warranty_Booked_Amount, SO.MI_BOOKED_AMT AS
+      MI_Booked_Amount, SO.FINANCED_AMT AS Financed_Amount, SO.WRITEOFF_AMT AS
+      Write_Off_Amount_OrdBook, SO.BOOKING_AMT AS Booking_Amount, SO.RECD_AMT AS
+      Received_Amount_orbook, SO.CHARGE_AMT AS Charge_Amount_ordbook,
+      SO.MGA_FIN_AMT AS MGA_Final_Amount, SI.VARIANT_CD AS VARIANT_CD,
+      SI.ECOLOR_CD AS ECOLOR_CD, SI.BOOKING_AMT AS Booking_Amount_Invoice,
+      SI.LOYL_REDEEM_AMT AS Loyalty_Redeem_Amount, SI.CHARGE_AMT AS
+      Charge_Amount, SI.FCB_AMT AS FCB_Amount, SI.FINANCED_AMT AS
+      Financed_Amount_invoice, SI.INV_AMT AS Invoice_Amount, SI.INTEREST_AMT AS
+      Interest_Amount_invoice, SI.CANCEL_CHARGE_AMT AS Cancel_Charge_Amount,
+      SI.RECD_AMT AS Received_Amount, SI.OCT_AMT AS Oct_Amount, SI.WRITEOFF_AMT
+      AS Write_Off_Amount_Invoice, SI.CANCEL_INV_AMT AS Cancel_Invoice_Amount,
+      SI.HYPO_AMT AS Hypo_Amount, SI.TDS_AMT AS TDS_Amount_Invoice, SO.REGION_CD
+      AS REGION_CD, SO.BILL_PIN AS BILL_PIN, SO.BILL_ADDRESS1 AS BILL_ADDRESS1,
+      SO.BILL_ADDRESS2 AS BILL_ADDRESS2, SO.BILL_ADDRESS3 AS BILL_ADDRESS3,
+      SI.EXCHANGE_FLAG AS EXCHANGE_FLAG, SO.CUSTOMER_CODE AS CUSTOMER_CODE,
+      CURRENT_DATE AS ETL_Inserted_Date, CURRENT_DATE AS ETL_Modified_Date,
+      'Platform_admin' AS ETL_Created_By, 'Platform_admin' AS ETL_Updated_By
+      FROM SH_INVOICE SI JOIN SH_ORDBOOK SO ON SI.ORDER_NUM = SO.ORDER_NUM AND
+      SI.PARENT_GROUP = SO.PARENT_GROUP AND SI.DEALER_MAP_CD = SO.DEALER_MAP_CD
+      AND SI.COMP_FA = SO.COMP_FA AND SI.LOC_CD = SO.LOC_CD
     optional:
       persistDataFrame: false
     type: operationThroughSqlQuery
