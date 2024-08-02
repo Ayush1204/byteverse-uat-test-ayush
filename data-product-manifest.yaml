@@ -1,26 +1,28 @@
-version: 0.0.2
+version: 0.0.4
 jobId: "778"
 jobName: newsadp_uat_test
 jobType: Source Aligned Data Product
 developerId: aaf6a67f-7b8b-4d1d-981d-5a26b24475dc
 domain: domain1
-alias: newsadpuat11
+alias: newsadpuat1204
 discoveryPort:
   name: newsadp_uat_test
 inputPorts:
-  - alias: Test_Data_Set_1
+  - alias: Customer_Master_1
     isDynamic: true
-    connection: Test Connection 1
-    tableName/query: table_1
+    path: s3://dataverse-sale/datasets/CustomerMaster.csv
     optional:
       persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
       enableDataReconciliation: false
       enforceSchema: false
-      dataSetUrn: urn:dv:dataset:4b0d4f89-f50a-4d06-bcac-18fa95d9041e
-    type: readMySqlDbUsingJdbc
+      connection: S3 Connection
+      dataSetUrn: urn:dv:dataset:5c1be963-86a1-421f-a449-c04666e0aec6
+    type: inputDelimited
 productState:
   isDynamic: true
-  alias: newsadpuat11
+  alias: newsadpuat1204
   retentionVersions: ""
   logicalSchema:
     properties:
@@ -114,7 +116,7 @@ productState:
   stateStoreType: loadDataIceberg
   isProfilingEnabled: false
   updateStrategy: Overwrite
-  tableName: s3Source.newsadpuat
+  tableName: s3Source.newsadpuat11
   warehousePath: s3://bp-spark-sql-library-test-acc/
   catalogName: glue
   optional:
@@ -127,12 +129,12 @@ productState:
 transformation:
   - isDynamic: true
     alias: Spark_SQL_1
-    description: UATstep1
+    description: UATstep1204
     sequence: 2
     inputDataFrameList:
-      - inputDataFrame: Test_Data_Set_1
-        tempViewName: newsadpuat
-    query: select * from newsadpuat
+      - inputDataFrame: Customer_Master_1
+        tempViewName: newsadpuat11
+    query: select * from newsadpuat11
     optional:
       persistDataFrame: false
     type: operationThroughSqlQuery
