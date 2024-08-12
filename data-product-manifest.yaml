@@ -1,0 +1,218 @@
+version: 0.0.3
+jobId: "782"
+jobName: newsadp_uat_SpecialChara_12THAUG
+jobType: Source Aligned Data Product
+developerId: aaf6a67f-7b8b-4d1d-981d-5a26b24475dc
+domain: domain1
+alias: newsadpuat111
+discoveryPort:
+  name: newsadp_uat_SpecialChara_12THAUG
+inputPorts:
+  - alias: Customer_Master_1
+    isDynamic: true
+    path: s3://dataverse-sale/datasets/CustomerMaster.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection
+      dataSetUrn: urn:dv:dataset:5c1be963-86a1-421f-a449-c04666e0aec6
+    type: inputDelimited
+productState:
+  isDynamic: true
+  alias: newsadpuat111
+  retentionVersions: ""
+  logicalSchema:
+    properties:
+      INV_DATE:
+        type: STRING
+        description: Invoice Date's it's a nice weather for my city's
+      CANCEL_DATE:
+        type: STRING
+        description: Cancel Date
+      Invoice_Cancellation_Date:
+        type: STRING
+        description: Invoice_Cancellation_Date
+      ORDER_DATE:
+        type: STRING
+        description: ORDER_DATE
+      ORDER_NUM:
+        type: STRING
+        description: Order No for the item
+      VIN:
+        type: STRING
+        description: Vehicle Identification Number%
+      DEALER_MAP_CD:
+        type: STRING
+        description: Dealer Mapping Code
+      Company_FA:
+        type: STRING
+        description: Dealer Mapping Code
+      Location_code:
+        type: STRING
+        description: Location Code
+      PARENT_GROUP:
+        type: STRING
+        description: Parent Group
+      Invoice_type:
+        type: STRING
+        description: type of Invoice
+      Invoice_Number:
+        type: STRING
+        description: Invoice Number
+      TEHSIL_CODE:
+        type: STRING
+        description: Code Of Tehsil
+      VILLAGE_CODE:
+        type: STRING
+        description: Code Of Village
+      STATE_CODE:
+        type: STRING
+        description: Code Of State
+      CS_MGA_Sold_Amount:
+        type: STRING
+        description: MGA Sold Amount
+      TDS_Amount_OrdBook:
+        type: STRING
+        description: TDS Amount
+      Interest_Amount:
+        type: STRING
+        description: Interest Amount
+      Final_Amount:
+        type: STRING
+        description: Final Amount
+      EMI_Amount:
+        type: STRING
+        description: EMI Amount
+      Insurance_Amount:
+        type: STRING
+        description: Insurance Amount
+      Net_Premium_Amount:
+        type: STRING
+        description: Net_Premium_Amount
+      Autocard_Booked_Amount:
+        type: STRING
+        description: Autocard_Booked_Amount
+      Extended_Warranty_Booked_Amount:
+        type: STRING
+        description: Extended_Warranty_Booked_Amount
+      MI_Booked_Amount:
+        type: STRING
+        description: MI_Booked_Amount
+      Financed_Amount:
+        type: STRING
+        description: Financed_Amount
+      Write_Off_Amount_OrdBook:
+        type: STRING
+        description: Write_Off_Amount_OrdBook
+      Booking_Amount:
+        type: STRING
+        description: Booking_Amount
+      Received_Amount_orbook:
+        type: STRING
+        description: Received_Amount_orbook
+      Charge_Amount_ordbook:
+        type: STRING
+        description: Charge_Amount_ordbook
+      MGA_Final_Amount:
+        type: STRING
+        description: MGA_Final_Amount
+      Variant_Code:
+        type: STRING
+        description: VARIANT_Code
+      Ecolor_Code:
+        type: STRING
+        description: Ecolor_Code
+      Booking_Amount_Invoice:
+        type: STRING
+        description: Booking_Amount_Invoice
+      Loyalty_Redeem_Amount:
+        type: STRING
+        description: Loyalty_Redeem_Amount
+      Charge_Amount:
+        type: STRING
+        description: Charge_Amount
+      FCB_Amount:
+        type: STRING
+        description: FCB_Amount
+      Financed_Amount_invoice:
+        type: STRING
+        description: Financed_Amount_invoice
+      Invoice_Amount:
+        type: STRING
+        description: Invoice_Amount
+      Interest_Amount_invoice:
+        type: STRING
+        description: Interest_Amount_invoice
+      Cancel_Charge_Amount:
+        type: STRING
+        description: Cancel_Charge_Amount
+      Received_Amount:
+        type: STRING
+        description: Received_Amount
+      Oct_Amount:
+        type: STRING
+        description: Oct_Amount
+      Write_Off_Amount_Invoice:
+        type: STRING
+        description: Write_Off_Amount_Invoice
+      Cancel_Invoice_Amount:
+        type: STRING
+        description: Cancel_Invoice_Amount
+      Hypo_Amount:
+        type: STRING
+        description: Hypo_Amount
+      TDS_Amount_Invoice:
+        type: STRING
+        description: TDS_Amount_Invoice
+      Region_Code:
+        type: STRING
+        description: Region_Code
+      BILL_PIN:
+        type: STRING
+        description: BILL_PIN
+      BILL_ADDRESS1:
+        type: STRING
+        description: BILL_ADDRESS1
+      BILL_ADDRESS2:
+        type: STRING
+        description: BILL_ADDRESS2
+      BILL_ADDRESS3:
+        type: STRING
+        description: BILL_ADDRESS3
+      CUSTOMER_CODE:
+        type: STRING
+        description: CUSTOMER_CODE
+      EXCHANGE_FLAG:
+        type: STRING
+        description: EXCHANGE_FLAG
+  stateStoreType: loadDataIceberg
+  isProfilingEnabled: false
+  updateStrategy: Overwrite
+  tableName: s3Source.newsadpuatspec1
+  warehousePath: s3://bp-spark-sql-library-test-acc/
+  catalogName: glue
+  optional:
+    persistDataFrame: false
+    enableDataReconciliation: false
+    enforceSchema: false
+    enforceSchemaMethod: Warning
+    catalogType: glue
+  refreshInterval: None
+transformation:
+  - isDynamic: true
+    alias: Spark_SQL_1
+    description: UATstepchar 1
+    sequence: 2
+    inputDataFrameList:
+      - inputDataFrame: Customer_Master_1
+        tempViewName: specailtable
+    query: SELECT * FROM specailtable WHERE loyalty_id IN (SELECT DISTINCT
+      loyalty_id FROM specailtable);
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
+controlPort:
+  dataQualityRules: {}
