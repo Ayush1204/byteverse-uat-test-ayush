@@ -1,0 +1,57 @@
+version: 0.0.1
+jobId: "780"
+jobName: Ayush_Iceberg
+jobType: Source Aligned Data Product
+developerId: aaf6a67f-7b8b-4d1d-981d-5a26b24475dc
+domain: domain1
+alias: loadingthedataice
+discoveryPort:
+  name: Ayush_Iceberg
+inputPorts:
+  - alias: uat_iceberg_1
+    isDynamic: true
+    tableName: iceberg_meta.scd1_data
+    warehousePath: /data/tmp/iceberg_warehouse/
+    catalogName: my_catalog
+    optional:
+      persistDataFrame: false
+      catalogType: glue
+      enforceSchema: false
+      connection: S3 Connection
+      dataSetUrn: urn:dv:dataset:00b159c1-a20b-4752-ab5c-ccdc651095d0
+    type: readDataIceberg
+productState:
+  isDynamic: true
+  alias: loadingthedataice
+  retentionVersions: ""
+  logicalSchema:
+    properties:
+      s:
+        type: STRING
+        description: ""
+  stateStoreType: loadDataIceberg
+  isProfilingEnabled: false
+  tableName: iceberg_meta.ayush_sales_gen_test_sc2
+  warehousePath: /data/tmp/iceberg_warehouse/
+  catalogName: random_catalog
+  optional:
+    persistDataFrame: false
+    enableDataReconciliation: false
+    enforceSchema: true
+    enforceSchemaMethod: Warning
+    catalogType: postgres
+  refreshInterval: None
+transformation:
+  - isDynamic: true
+    alias: Spark_SQL_1
+    description: testing1
+    sequence: 2
+    inputDataFrameList:
+      - inputDataFrame: uat_iceberg_1
+        tempViewName: icebergcatalog
+    query: select * from icebergcatalog
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
+controlPort:
+  dataQualityRules: {}
