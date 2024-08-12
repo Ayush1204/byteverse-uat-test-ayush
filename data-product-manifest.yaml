@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.0.2
 jobId: "780"
 jobName: Ayush_Iceberg
 jobType: Source Aligned Data Product
@@ -31,6 +31,7 @@ productState:
         description: ""
   stateStoreType: loadDataIceberg
   isProfilingEnabled: false
+  updateStrategy: Overwrite
   tableName: iceberg_meta.ayush_sales_gen_test_sc2
   warehousePath: /data/tmp/iceberg_warehouse/
   catalogName: random_catalog
