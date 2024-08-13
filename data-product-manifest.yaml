@@ -1,0 +1,68 @@
+version: 0.0.1
+jobId: "783"
+jobName: Test SADP
+jobType: Source Aligned Data Product
+developerId: aaf6a67f-7b8b-4d1d-981d-5a26b24475dc
+domain: domain1
+alias: testuatload1
+discoveryPort:
+  name: Test SADP
+inputPorts:
+  - alias: Test_Dataset_1
+    isDynamic: true
+    path: s3://dataverse-sale/datasets/CustomerMaster.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: Test conn
+      dataSetUrn: urn:dv:dataset:cfe5c293-beb5-451e-af8d-0459cc7ff510
+    type: inputDelimited
+  - alias: newsadp_uat_SpecialChar_1
+    isDynamic: true
+    dataProductUrn: urn:dv:dataproduct:cbbecac0-f9b7-4872-97fa-6be49c548b78
+    filter: ""
+    projection: ""
+    optional:
+      persistDataFrame: false
+    type: dataproduct
+productState:
+  isDynamic: true
+  alias: testuatload1
+  retentionVersions: ""
+  logicalSchema:
+    properties:
+      s:
+        type: STRING
+        description: ""
+  stateStoreType: loadDataIceberg
+  isProfilingEnabled: false
+  updateStrategy: Overwrite
+  tableName: s3source.testuatnew
+  warehousePath: s3://bp-spark-sql-library-test-acc/
+  catalogName: glue
+  optional:
+    persistDataFrame: false
+    enableDataReconciliation: false
+    enforceSchema: true
+    enforceSchemaMethod: Warning
+    catalogType: glue
+  refreshInterval: None
+transformation:
+  - isDynamic: true
+    alias: Spark_SQL_1
+    description: testuat1
+    sequence: 3
+    inputDataFrameList:
+      - inputDataFrame: Test_Dataset_1
+        tempViewName: testuatnew
+      - inputDataFrame: newsadp_uat_SpecialChar_1
+        tempViewName: testuatnew1
+    query: select * from testuatnew
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
+controlPort:
+  dataQualityRules: {}
