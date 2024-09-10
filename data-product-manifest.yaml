@@ -1,9 +1,9 @@
-version: 0.0.1
+version: 0.0.2
 jobId: "787"
 jobName: UAT D2 DP
 jobType: Source Aligned Data Product
 developerId: b539371e-68c4-4b3c-8bb4-4b21500dd227
-domain: domain2
+domain: domain1
 alias: loaddataicebergforcustomertestu
 discoveryPort:
   name: UAT D2 DP
