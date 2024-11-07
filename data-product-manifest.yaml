@@ -162,12 +162,4 @@ transformation:
       persistDataFrame: false
     type: operationThroughSqlQuery
 controlPort:
-  dataQualityRules:
-    NullValueCheck:
-      productState:
-        checks:
-          - column: Card_Id
-            expression: <=
-            number: 1
-            owner: Ayush shah
-        referenceAlias: loaddataicebergforcustomertestacc
+  dataQualityRules: {}
