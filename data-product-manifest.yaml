@@ -1,0 +1,57 @@
+jobId: "790"
+jobName: sadp_uat_noSourcetable
+jobType: Source Aligned Data Product
+developerId: aaf6a67f-7b8b-4d1d-981d-5a26b24475dc
+domain: domain1
+alias: loadsadpuat1nst
+discoveryPort:
+  name: sadp_uat_noSourcetable
+inputPorts:
+  - alias: Customer_Master_1
+    isDynamic: true
+    path: s3://dataverse-sale/datasets/CustomerMaster.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection
+      dataSetUrn: urn:dv:dataset:5c1be963-86a1-421f-a449-c04666e0aec6
+    type: inputDelimited
+productState:
+  isDynamic: true
+  alias: loadsadpuat1nst
+  retentionVersions: ""
+  logicalSchema:
+    properties:
+      s:
+        type: STRING
+        description: ""
+  stateStoreType: loadDataIceberg
+  isProfilingEnabled: false
+  updateStrategy: Overwrite
+  tableName: s3source.newsadpuat1nst
+  warehousePath: s3://bp-spark-sql-library-test-acc/
+  catalogName: glue
+  optional:
+    persistDataFrame: false
+    enableDataReconciliation: false
+    enforceSchema: true
+    enforceSchemaMethod: Warning
+    catalogType: glue
+  refreshInterval: None
+transformation:
+  - isDynamic: true
+    alias: Spark_SQL_1
+    description: test1nst
+    sequence: 2
+    inputDataFrameList:
+      - inputDataFrame: Customer_Master_1
+        tempViewName: newsadpuat1nst
+    query: select * from newsadpuat1nst
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
+controlPort:
+  dataQualityRules: {}
