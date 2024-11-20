@@ -1,11 +1,11 @@
 jobId: "792"
-jobName: Test SADP copy
+jobName: NewSalesDPtest
 jobType: Source Aligned Data Product
 developerId: aaf6a67f-7b8b-4d1d-981d-5a26b24475dc
 domain: domain1
 alias: testuatload112
 discoveryPort:
-  name: Test SADP copy
+  name: NewSalesDPtest
 inputPorts:
   - alias: Test_Dataset_1
     isDynamic: true
