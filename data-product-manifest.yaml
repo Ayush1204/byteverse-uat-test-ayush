@@ -1,0 +1,98 @@
+jobId: "792"
+jobName: Test SADP copy
+jobType: Source Aligned Data Product
+developerId: aaf6a67f-7b8b-4d1d-981d-5a26b24475dc
+domain: domain1
+alias: testuatload112
+discoveryPort:
+  name: Test SADP copy
+inputPorts:
+  - alias: Test_Dataset_1
+    isDynamic: true
+    path: s3://dataverse-sale/datasets/CustomerMaster.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: Test conn
+      dataSetUrn: urn:dv:dataset:cfe5c293-beb5-451e-af8d-0459cc7ff510
+    type: inputDelimited
+  - alias: newsadp_uat_SpecialChar_1
+    isDynamic: true
+    dataProductUrn: urn:dv:dataproduct:cbbecac0-f9b7-4872-97fa-6be49c548b78
+    filter: ""
+    projection: ""
+    optional:
+      persistDataFrame: false
+    type: dataproduct
+productState:
+  isDynamic: true
+  alias: testuatload112
+  retentionVersions: ""
+  logicalSchema:
+    properties:
+      region:
+        type: STRING
+        description: Unique identifier for each region.
+        sourceColumn: region
+        sourceTable: "-"
+      zsmcode:
+        type: STRING
+        description: zsmcode
+        sourceColumn: zsmcode
+        sourceTable: "-"
+        isPII: true
+      zsmname:
+        type: STRING
+        description: zsmname
+        sourceColumn: zsmname
+        sourceTable: "-"
+        isPII: true
+      ahcode:
+        type: STRING
+        description: ahcode.
+        sourceColumn: ahcode
+        sourceTable: "-"
+        isPII: true
+      ahname:
+        type: STRING
+        description: ahname.
+        sourceColumn: ahname
+        sourceTable: "-"
+        isPII: true
+      asmname:
+        type: STRING
+        description: asmname
+        sourceColumn: asmname
+        sourceTable: "-"
+  stateStoreType: loadDataIceberg
+  isProfilingEnabled: false
+  updateStrategy: Overwrite
+  tableName: s3source.testuatnew12
+  warehousePath: s3://bp-spark-sql-library-test-acc/
+  catalogName: glue
+  optional:
+    persistDataFrame: false
+    enableDataReconciliation: false
+    enforceSchema: true
+    enforceSchemaMethod: Warning
+    catalogType: glue
+  refreshInterval: None
+transformation:
+  - isDynamic: true
+    alias: Spark_SQL_1
+    description: testuat12
+    sequence: 3
+    inputDataFrameList:
+      - inputDataFrame: Test_Dataset_1
+        tempViewName: testuatnew12
+      - inputDataFrame: newsadp_uat_SpecialChar_1
+        tempViewName: testuatnew123
+    query: select * from testuatnew12
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
+controlPort:
+  dataQualityRules: {}
