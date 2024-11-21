@@ -95,4 +95,12 @@ transformation:
       persistDataFrame: false
     type: operationThroughSqlQuery
 controlPort:
-  dataQualityRules: {}
+  dataQualityRules:
+    NullValueCheck:
+      productState:
+        checks:
+          - column: Customer_id
+            expression: <=
+            number: 1
+            owner: Ayush Jain
+        referenceAlias: testuatload112
