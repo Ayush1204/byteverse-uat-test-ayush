@@ -139,7 +139,7 @@ productState:
   stateStoreType: loadDataIceberg
   isProfilingEnabled: false
   updateStrategy: Overwrite
-  tableName: s3source.newsadpuat1a
+  tableName: s3source.newvendordp
   warehousePath: s3://bp-spark-sql-library-test-acc/
   catalogName: glue
   optional:
