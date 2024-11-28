@@ -110,7 +110,7 @@ productState:
         sourceTable: customers
       Employee_Flag:
         type: STRING
-        description: Flag indicating whether the customer is an employee.
+        description: Flag indicating whether the customer is an employee or not.
         sourceColumn: Employee_Flag
         sourceTable: customers
       Relationship_SPOC_ID:
