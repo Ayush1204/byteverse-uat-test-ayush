@@ -162,4 +162,11 @@ transformation:
       persistDataFrame: false
     type: operationThroughSqlQuery
 controlPort:
-  dataQualityRules: {}
+  dataQualityRules:
+    NullValueCheck:
+      productState:
+        checks:
+          - column: Customer_ID
+            expression: <=
+            number: 1
+        referenceAlias: loadsadpuat1a12
